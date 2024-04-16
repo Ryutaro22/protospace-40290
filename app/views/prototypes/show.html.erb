@@ -2,9 +2,9 @@
   <div class="inner">
     <div class="prototype__wrapper">
       <p class="prototype__hedding">
-        <%= "プロトタイプのタイトル"%>
+        <%= @prototype.title %>
       </p>
-      <%= link_to "by プロトタイプの投稿者", user_path, class: :prototype__user %>
+      <%= link_to "by プロトタイプの投稿者", user_path(@prototype), class: :prototype__user %>
       <%# プロトタイプの投稿者とログインしているユーザーが同じであれば以下を表示する %>
         <div class="prototype__manage">
           <% if user_signed_in? && current_user.id == @prototype.user_id %>
@@ -20,13 +20,13 @@
         <div class="prototype__detail">
           <p class="detail__title">キャッチコピー</p>
           <p class="detail__message">
-            <%= "プロトタイプのキャッチコピー" %>
+            <%= @prototype.catch_copy %>
           </p>
         </div>
         <div class="prototype__detail">
           <p class="detail__title">コンセプト</p>
           <p class="detail__message">
-            <%= "プロトタイプのコンセプト" %>
+            <%= @prototype.concept %>
           </p>
         </div>
       </div>
@@ -46,13 +46,12 @@
       <strong><p>※※※ コメントの投稿には新規登録/ログインが必要です ※※※</p></strong>
         <% end %>
         <%# // ログインしているユーザーには上記を表示する %>
-
         <ul class="comments_lists">
           <%# 投稿に紐づくコメントを一覧する処理を記述する %>
             <li class="comments_list">
               <% @comments.each do |comment| %>
               <p>
-                <strong><%= link_to comment.user.name, user_path, class: :comment_user %>:</strong>
+                <strong><%= link_to comment.user.name, user_path(@prototype), class: :comment_user %>:</strong>
                 <%= comment.text %>
               </p>
               <% end %>
