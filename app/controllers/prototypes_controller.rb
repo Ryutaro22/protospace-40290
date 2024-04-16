@@ -4,7 +4,7 @@ class PrototypesController < ApplicationController
   before_action :move_to_index, except: [:index, :show, :new]
 
   def index
-    @prototypes = Prototype.all.includes(:user)
+    @prototypes = Prototype.includes(:user)
   end
 
   def new
